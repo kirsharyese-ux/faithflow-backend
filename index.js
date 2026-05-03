@@ -4,8 +4,6 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-console.log("BOOTING SERVER...");
-
 const app = express();
 
 app.use(cors());
@@ -16,16 +14,9 @@ app.get("/", (req, res) => {
 });
 
 app.post("/api/ai/chat", (req, res) => {
-  const { message } = req.body;
-
-  if (!message) {
-    return res.status(400).json({ error: "Message required" });
-  }
-
-  res.json({ reply: "Test mode: " + message });
+  res.json({ reply: "Test response from AI chat" });
 });
 
-// ✅ ONLY ONE PORT DECLARATION
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
