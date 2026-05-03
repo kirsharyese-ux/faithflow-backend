@@ -1,12 +1,10 @@
-console.log("BOOTING SERVER...");
-
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-console.log("Starting server...");
+console.log("BOOTING SERVER...");
 
 const app = express();
 
@@ -27,12 +25,9 @@ app.post("/api/ai/chat", (req, res) => {
   res.json({ reply: "Test mode: " + message });
 });
 
+// ✅ ONLY ONE PORT DECLARATION
 const PORT = process.env.PORT || 3000;
 
-try {
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
-} catch (err) {
-  console.error("CRASH:", err);
-}
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
