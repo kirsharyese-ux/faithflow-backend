@@ -18,6 +18,10 @@ app.get("/", (req, res) => {
 });
 
 // AI route (temporary test version)
+app.get("/", (req, res) => {
+  res.send("Backend is working 🚀");
+});
+
 app.post("/api/ai/chat", async (req, res) => {
   try {
     const { message } = req.body;
