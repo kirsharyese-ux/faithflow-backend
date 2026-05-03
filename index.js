@@ -2,39 +2,42 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 
-dotenv.config();
+console.log("🚀 SERVER FILE EXECUTING");
 
-console.log("BOOTING SERVER...");
+dotenv.config();
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-// ✅ ROOT ROUTE
+console.log("📡 REGISTERING ROUTES...");
+
+// GET "/" route
 app.get("/", (req, res) => {
   res.send("Backend is working 🚀");
 });
 
-// ✅ VERSION ROUTE
+// GET "/version" route
 app.get("/version", (req, res) => {
   res.send("NEW VERSION LIVE");
 });
 
-// ✅ DEBUG: list all routes
+// GET "/routes" route
 app.get("/routes", (req, res) => {
   res.json({
     routes: [
       "GET /",
       "GET /version",
+      "GET /routes",
       "POST /api/ai/chat"
     ]
   });
 });
 
-// ✅ AI ROUTE (MUST BE HERE BEFORE listen)
+// POST "/api/ai/chat" route
 app.post("/api/ai/chat", (req, res) => {
-  const { message } = req.body || {};
+  const { message } = req.body;
 
   if (!message) {
     return res.status(400).json({
@@ -47,7 +50,14 @@ app.post("/api/ai/chat", (req, res) => {
   });
 });
 
-// ✅ START SERVER (LAST THING ONLY)
+// Fallback middleware for 404
+app.use((req, res) => {
+  res.status(404).json({
+    error: "Route not found",
+    path: req.path
+  });
+});
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
