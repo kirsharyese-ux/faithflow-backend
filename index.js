@@ -1,3 +1,5 @@
+console.log("BOOTING SERVER...");
+
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -30,3 +32,13 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+const PORT = process.env.PORT || 3000;
+
+try {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+} catch (err) {
+  console.error("CRASH:", err);
+}
