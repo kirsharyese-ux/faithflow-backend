@@ -16,6 +16,10 @@ app.get("/", (req, res) => {
   res.send("Backend is working 🚀");
 });
 
+app.get("/version", (req, res) => {
+  res.send("NEW VERSION LIVE");
+});
+
 // ✅ FORCE AI ROUTE (THIS IS WHAT YOU WERE MISSING)
 app.post("/api/ai/chat", async (req, res) => {
   try {
