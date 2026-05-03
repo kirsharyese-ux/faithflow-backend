@@ -1,17 +1,19 @@
 import express from "express";
 import cors from "cors";
 
+console.log("Starting server...");
+
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-// Test route
+// Root test route
 app.get("/", (req, res) => {
   res.send("Backend is working 🚀");
 });
 
-// AI route
+// AI test route
 app.post("/api/ai/chat", (req, res) => {
   const { message } = req.body;
 
@@ -20,7 +22,7 @@ app.post("/api/ai/chat", (req, res) => {
   });
 });
 
-// 🚨 THIS IS THE MOST IMPORTANT PART
+// IMPORTANT: use Render port
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
