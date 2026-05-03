@@ -2,48 +2,52 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 
-console.log("DEPLOY VERSION: 1.1 LIVE");
-
 dotenv.config();
+
+console.log("BOOTING SERVER...");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-// GET "/" route
+// ✅ ROOT ROUTE
 app.get("/", (req, res) => {
   res.send("Backend is working 🚀");
 });
 
-// GET "/version" route
+// ✅ VERSION ROUTE
 app.get("/version", (req, res) => {
   res.send("NEW VERSION LIVE");
 });
 
-// POST "/api/ai/chat" route
-app.post("/api/ai/chat", async (req, res) => {
-  try {
-    const { message } = req.body;
-
-    if (!message) {
-      return res.status(400).json({
-        error: "Message is required"
-      });
-    }
-
-    return res.json({
-      reply: "Test mode: " + message
-    });
-
-  } catch (error) {
-    console.error("Route error:", error);
-    return res.status(500).json({
-      error: "Internal server error"
-    });
-  }
+// ✅ DEBUG: list all routes
+app.get("/routes", (req, res) => {
+  res.json({
+    routes: [
+      "GET /",
+      "GET /version",
+      "POST /api/ai/chat"
+    ]
+  });
 });
 
+// ✅ AI ROUTE (MUST BE HERE BEFORE listen)
+app.post("/api/ai/chat", (req, res) => {
+  const { message } = req.body || {};
+
+  if (!message) {
+    return res.status(400).json({
+      error: "Message is required"
+    });
+  }
+
+  return res.json({
+    reply: "Test mode: " + message
+  });
+});
+
+// ✅ START SERVER (LAST THING ONLY)
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
