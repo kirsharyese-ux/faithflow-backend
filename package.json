@@ -1,18 +1,14 @@
 {
   "name": "faithflow-backend",
   "version": "1.0.0",
-  "description": "FaithFlow backend",
-  "main": "index.js",
   "type": "module",
+  "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
-    "cors": "^2.8.5",
-    "debug": "^4.3.4",
-    "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "openai": "^6.35.0",
-    "debug": "^4.3.4"
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3"
   }
 }
