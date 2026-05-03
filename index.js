@@ -1,36 +1,28 @@
 import express from "express";
+import cors from "cors";
 
 const app = express();
+
+app.use(cors());
 app.use(express.json());
 
+// Test route
 app.get("/", (req, res) => {
   res.send("Backend is working 🚀");
 });
 
+// AI route
 app.post("/api/ai/chat", (req, res) => {
   const { message } = req.body;
 
   res.json({
-    reply: "This is your new backend responding to: " + message,
+    reply: "Backend response: " + message
   });
 });
 
-app.listen(3000, () => {
-  console.log("Server running on http://localhost:3000");
-});
-
+// 🚨 THIS IS THE MOST IMPORTANT PART
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`Server running on ${PORT}`);
-});
-
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`Server running on ${PORT}`);
-});
-
-app.get("/", (req, res) => {
-  res.send("Backend is working 🚀");
+  console.log(`Server running on port ${PORT}`);
 });
